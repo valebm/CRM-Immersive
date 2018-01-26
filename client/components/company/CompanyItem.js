@@ -4,20 +4,10 @@ import PropTypes from 'prop-types'
 
 
 
-const CompanyItem = ({company, remove}) => {
+const CompanyItem = (props) => {
   // Each Company
-  return (<tbody className="table"><tr id={company.id}><td>{company.name}</td><td>{company.address}</td><td>{company.phone}</td></tr></tbody>);
+  return (<tbody><tr id={props.company.id}><td>{props.company.name}</td><td>{props.company.address}</td><td>{props.company.phone}</td></tr></tbody>);
 }
 
 
- export default CompanyItem;
-
- CompanyItem.propTypes = {
- 	company: PropTypes.object,
- 	remove: PropTypes.func,
-}
-
- CompanyItem.defaultProps = {
- 	company: { },
- 	remove: () => { },
- }
+export default CompanyItem;

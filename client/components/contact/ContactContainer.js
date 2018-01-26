@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ContactTable from './ContactTable';
-
+import { connect } from 'react-redux'
+import { addContact, uploadContacts } from './actions'
 
 const uuidv1 = require('uuid/v1');
 // Contaner Component
@@ -22,8 +23,7 @@ class ContactContainer extends React.Component{
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
-    this.handleErase = this.handleErase.bind(this);
+
 
     }
 
@@ -32,7 +32,7 @@ class ContactContainer extends React.Component{
     console.log(this.state.value)
    }
 
-   handleSubmit(event){
+  handleSubmit(event){
    	var contact = {}
    	contact.id = uuidv1();
     contact.name = this.state.value;
@@ -41,30 +41,6 @@ class ContactContainer extends React.Component{
     contact.position = "";
     contact.company = "";
     this.setState({contacts: [...this.state.contacts, contact]});
-    console.log(this.state.contacts)
-   }
-      
-   handleRemove(event){
-   	var id = event.target.parentNode.getAttribute('id')
-   	this.state.contacts.map(function(item) {
-      if (item.id == id){
-        item.done = true;       
-      }
-    });
-   	console.log(this.state.contacts)
-   	this.setState({contacts: this.state.contacts});
-
-   }
-
-   handleErase(event){
-   	var id = event.target.parentNode.getAttribute('id')
-
-    this.state.contacts = this.state.contacts.filter(function(el, i) {
-      	return id !== el.id;
-    });
-
-   	console.log(this.state.contacts)
-   	this.setState({contacts: this.state.contacts});
    }
 
   render(){
@@ -76,7 +52,7 @@ class ContactContainer extends React.Component{
       CONTACTS
       <input type="text" id="contactVal" value={this.state.value} onChange={this.handleChange}></input>
       <button id="addContactButt" onClick={this.handleSubmit}>Add</button>
-      <ContactTable contacts={this.state.contacts} remove={this.handleRemove} erase={this.handleErase}/>           
+      <ContactTable contacts={this.props.contacts}/>           
     </div> 
     );
   }
@@ -84,15 +60,28 @@ class ContactContainer extends React.Component{
 
   componentDidMount(){
 
-	const url = 'http://localhost:3000/contacts';
-
-	fetch(url)
-	  .then((resp) => resp.json())
-	  .then((data) => {    
-   		this.setState({contacts: data});
-	  })
+    const url = 'http://localhost:3000/contacts';
+    fetch(url)
+      .then((resp) => resp.json())
+      .then((data) => {  
+        this.props.uploadContacts(data)
+      })
   }
 }
 
 
- export default ContactContainer;
+function mapStateToProps(state) {
+  return {
+    contacts: state.contacts.contacts
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    addContact: value => dispatch(addContact(value)),
+    uploadContacts: value => dispatch(uploadContacts(value))
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactContainer)
