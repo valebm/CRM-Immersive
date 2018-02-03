@@ -1,62 +1,44 @@
 {
   "companies": [
     {
-      "id": 1,
-      "name": "name1",
+      "id": "42bb8770-092b-11e8-86e0-e5e469eba754",
+      "name": "nadnslaks",
       "address": "",
-      "phone" : 111
-    },
-    {
-      "id": 2,
-      "name": "name2",
-      "address": "",
-      "phone" : 222
-    },
-    {
-      "id": 3,
-      "name": "name3",
-      "address": "",
-      "phone" : 333
-    },
-    {
-      "id": 4,
-      "name": "name4",
-      "address": "",
-      "phone" : 444
+      "phone": 0
     }
   ],
-    "contacts": [
+  "contacts": [
     {
       "id": 1,
       "name": "name1",
       "email": "",
-      "phone" : 111,
-      "position" : "P1",
-      "company" : "C1"
+      "phone": 111,
+      "position": "P1",
+      "company": "C1"
     },
     {
       "id": 2,
       "name": "name2",
       "email": "",
-      "phone" : 222,
-      "position" : "P2",
-      "company" : "C2"
+      "phone": 222,
+      "position": "P2",
+      "company": "C2"
     },
     {
       "id": 3,
       "name": "name3",
       "email": "",
-      "phone" : 333,
-      "position" : "P3",
-      "company" : "C3"
+      "phone": 333,
+      "position": "P3",
+      "company": "C3"
     },
     {
       "id": 4,
       "name": "name4",
       "email": "",
-      "phone" : 444,
-      "position" : "P4",
-      "company" : "C4"
+      "phone": 444,
+      "position": "P4",
+      "company": "C4"
     }
   ]
 }

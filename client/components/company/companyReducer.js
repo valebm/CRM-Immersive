@@ -1,29 +1,65 @@
 // companies reducer
-import uuid from 'uuid/v1'
-
 const DEFAULT_STATE = {
-  companies: []
+  loading: false,
+  companies: [],
+  error: '',
+  id: ''
 }
 
 const companies = (state = DEFAULT_STATE, action) => {
 
   switch (action.type) {
-    case 'ADD_COMPANY':
+    case 'GET_COMPANIES_REQUEST':
       return {
         ...state,
-        companies: [...state.companies, {
-          id: uuid(),
-          name: action.value,
-          address: action.address,
-          phone: action.phone
-        }],
+        loading: true
       }
-    case 'UPLOAD_COMPANIES':
-    console.log(action.value)
+    case 'GET_COMPANIES_SUCCESS':
       return {
         ...state,
-        companies: action.value,
+        loading: false,
+        companies: action.companies
+      }
+    case 'GET_COMPANIES_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      }
+
+    case 'ADD_COMPANY_REQUEST':
+      return {
+        ...state,
+        loading: true
+      }
+    case 'ADD_COMPANY_SUCCESS':
+      return {
+        companies: [...state.companies, { ...action.company }],
+        loading: false,
+      }
+    case 'ADD_COMPANY_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.error
       } 
+
+    case 'DELETE_COMPANY_REQUEST':
+      return {
+        ...state,
+        loading: true      
+      }
+    case 'DELETE_COMPANY_SUCCESS':
+      return {
+        companies: state.companies.filter(item => {return item.id !== action.id;}),
+        loading: false
+      }
+    case 'DELETE_COMPANY_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      }
     default:
       return state
   }

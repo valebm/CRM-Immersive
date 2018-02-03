@@ -2,6 +2,8 @@
     ./client/index.js
     which is the webpack entry file
 */
+import 'bootstrap';
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
