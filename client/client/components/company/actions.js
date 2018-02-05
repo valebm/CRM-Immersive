@@ -13,7 +13,7 @@ const DELETE_COMPANY_SUCCESS = 'DELETE_COMPANY_SUCCESS'
 const DELETE_COMPANY_FAILURE = 'DELETE_COMPANY_FAILURE'
 
 // API URL Constant
-const API_URL = 'http://localhost:3000/companies'
+const API_URL = 'http://localhost:8081/companies'
 
 export function addCompany(value) {
     return function (dispatch) {
@@ -22,7 +22,7 @@ export function addCompany(value) {
     })
     fetch(API_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({
         id: uuid(),
         name: value,

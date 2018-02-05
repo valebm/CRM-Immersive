@@ -9,12 +9,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import store from './components/store'
 import App from './components/App.js';
+import { BrowserRouter } from 'react-router-dom'
 
-
-//const App = () => (
-//	<h1> Hola </h1>
-//)
-
-
-
-ReactDOM.render( <Provider store={store}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render( <Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>, document.getElementById('root'));

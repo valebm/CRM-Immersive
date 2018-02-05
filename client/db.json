@@ -5,6 +5,18 @@
       "name": "nadnslaks",
       "address": "",
       "phone": 0
+    },
+    {
+      "id": "ef9eef00-0934-11e8-81c1-4f2242a7f3d6",
+      "name": "hola",
+      "address": "",
+      "phone": 0
+    },
+    {
+      "id": "f19ba960-0934-11e8-81c1-4f2242a7f3d6",
+      "name": "no",
+      "address": "",
+      "phone": 0
     }
   ],
   "contacts": [
