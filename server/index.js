@@ -9,6 +9,7 @@ const DB_QUERY_STRING = process.env.DB
 
 const companyRoutes = require('./routes/companies')
 const app = express()
+// create application/json parser
 
 app.use(morgan('tiny'))
 app.use(cors())

@@ -12,7 +12,19 @@ function getAll(req, res) {
     })
 }
 
+function add(req, res) {
+  var compny = new Company(req.body);
+  compny.save(function (err) {
+    if (err) {
+      res.status(500)
+      res.send(`Ocurrió un error 💩 ${err}`)}
+      res.status(200)    // thats it!
+      res.json(req.body)
+  });
+
+
+}
 module.exports = {
-  getAll
+  getAll, add
 }
 

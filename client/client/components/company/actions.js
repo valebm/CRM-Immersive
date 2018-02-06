@@ -20,7 +20,7 @@ export function addCompany(value) {
     dispatch({
       type: ADD_COMPANY_REQUEST
     })
-    fetch(API_URL, {
+    fetch(`${API_URL}/new`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({

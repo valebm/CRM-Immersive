@@ -46,12 +46,12 @@ class CompanyContainer extends React.Component{
   render(){
     // Render JSX
 
-    console.log(this.state.filt)
+    console.log(this.props)
     const elements  = this.props.companies;
     const filterStr  = this.state.filt;
 
     const filteredElements = elements
-      .filter(e => (e.name.includes(filterStr) || e.address.includes(filterStr) || e.id.includes(filterStr) || e.phone.toString().includes(filterStr)))
+      .filter(e => (e.name.includes(filterStr) || e.address.includes(filterStr) || e._id.includes(filterStr) || e.phone.toString().includes(filterStr)))
 
 
     return (
