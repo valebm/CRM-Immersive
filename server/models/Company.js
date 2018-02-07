@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
 const companySchema = mongoose.Schema({
-  name: { type: String, required: true },
+  iden: { type: String, required: true },
+  name: { type: String},
   address: { type: String},
   phone: { type: Number },
 })

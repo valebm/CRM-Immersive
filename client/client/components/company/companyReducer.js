@@ -3,7 +3,8 @@ const DEFAULT_STATE = {
   loading: false,
   companies: [],
   error: '',
-  id: ''
+  id: '',
+  company:{}
 }
 
 const companies = (state = DEFAULT_STATE, action) => {
@@ -50,14 +51,35 @@ const companies = (state = DEFAULT_STATE, action) => {
         loading: true      
       }
     case 'DELETE_COMPANY_SUCCESS':
+    console.log(action.id)
       return {
-        companies: state.companies.filter(item => {return item.id !== action.id;}),
+        ...state,
+        companies: state.companies.filter(item => {return item._id !== action.id;}),
         loading: false
       }
     case 'DELETE_COMPANY_FAILURE':
       return {
         ...state,
         loading: false,
+        error: action.error
+      }
+
+    case 'GET_COMPANY_REQUEST':
+      return {
+        ...state,
+        loading: true      
+      }
+    case 'GET_COMPANY_SUCCESS':
+      return {
+        ...state,
+        company: action.company,
+        loading: false
+      }
+    case 'GET_COMPANY_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        company: {},
         error: action.error
       }
     default:

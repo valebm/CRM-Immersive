@@ -8,6 +8,9 @@ const ADD_COMPANY_FAILURE = 'ADD_COMPANY_FAILURE'
 const GET_COMPANIES_REQUEST = 'GET_COMPANIES_REQUEST'
 const GET_COMPANIES_SUCCESS = 'GET_COMPANIES_SUCCESS'
 const GET_COMPANIES_FAILURE = 'GET_COMPANIES_FAILURE'
+const GET_COMPANY_REQUEST = 'GET_COMPANY_REQUEST'
+const GET_COMPANY_SUCCESS = 'GET_COMPANY_SUCCESS'
+const GET_COMPANY_FAILURE = 'GET_COMPANY_FAILURE'
 const DELETE_COMPANY_REQUEST = 'DELETE_COMPANY_REQUEST'
 const DELETE_COMPANY_SUCCESS = 'DELETE_COMPANY_SUCCESS'
 const DELETE_COMPANY_FAILURE = 'DELETE_COMPANY_FAILURE'
@@ -24,7 +27,7 @@ export function addCompany(value) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({
-        id: uuid(),
+        iden: uuid(),
         name: value,
         address: '',
         phone: 0
@@ -40,6 +43,29 @@ export function addCompany(value) {
       .catch(error => {
         dispatch({
           type: ADD_COMPANY_FAILURE,
+          error: error
+        })
+      })
+  }
+}
+
+export function getCompany(value) {
+    return function (dispatch) {
+    dispatch({
+      type: GET_COMPANY_REQUEST
+    })
+    fetch(`${API_URL}/${value}`)
+      .then(response => response.json())
+      .then(data => {
+        console.log("GET_SUCCESS")
+        dispatch({
+          type: GET_COMPANY_SUCCESS,
+          company: data
+        })
+      })
+      .catch(error => {
+        dispatch({
+          type: GET_COMPANY_FAILURE,
           error: error
         })
       })
@@ -70,6 +96,34 @@ export function uploadCompanies(){
 
 
 export function deleteCompany(value) {
+    return function (dispatch) {
+    dispatch({
+      type: DELETE_COMPANY_REQUEST
+    })
+    fetch(`${API_URL}/${value}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json'}
+    })
+    .then(response => response.json())
+      .then(data => {
+        console.log("DELETE_SUCCESS")
+        dispatch({
+          type: DELETE_COMPANY_SUCCESS,
+          company: data
+        })
+      })
+      .catch(error => {
+        dispatch({
+          type: DELETE_COMPANY_FAILURE,
+          error: error
+        })
+      })
+
+  }
+}
+
+
+export function editCompany(value) {
     return function (dispatch) {
     dispatch({
       type: DELETE_COMPANY_REQUEST
