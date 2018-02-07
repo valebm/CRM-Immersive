@@ -14,6 +14,9 @@ const GET_COMPANY_FAILURE = 'GET_COMPANY_FAILURE'
 const DELETE_COMPANY_REQUEST = 'DELETE_COMPANY_REQUEST'
 const DELETE_COMPANY_SUCCESS = 'DELETE_COMPANY_SUCCESS'
 const DELETE_COMPANY_FAILURE = 'DELETE_COMPANY_FAILURE'
+const EDIT_COMPANY_REQUEST = 'EDIT_COMPANY_REQUEST'
+const EDIT_COMPANY_SUCCESS = 'EDIT_COMPANY_SUCCESS'
+const EDIT_COMPANY_FAILURE = 'EDIT_COMPANY_FAILURE'
 
 // API URL Constant
 const API_URL = 'http://localhost:8081/companies'
@@ -109,7 +112,7 @@ export function deleteCompany(value) {
         console.log("DELETE_SUCCESS")
         dispatch({
           type: DELETE_COMPANY_SUCCESS,
-          company: data
+          id: value
         })
       })
       .catch(error => {
@@ -123,24 +126,30 @@ export function deleteCompany(value) {
 }
 
 
-export function editCompany(value) {
+export function editCompany(i, value, ad, ph) {
     return function (dispatch) {
     dispatch({
-      type: DELETE_COMPANY_REQUEST
+      type: EDIT_COMPANY_REQUEST
     })
-    fetch(`${API_URL}/${value}`, {
-      method: 'DELETE',
+    fetch(`${API_URL}/edit/${i}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        name: value,
+        address: ad, 
+        phone: ph
+      }),
     })
       .then(response => response.json())
       .then(data => {
         dispatch({
-          type: DELETE_COMPANY_SUCCESS,
-          id: value
+          type: EDIT_COMPANY_SUCCESS,
+          company: data
         })
       })
       .catch(error => {
         dispatch({
-          type: DELETE_COMPANY_FAILURE,
+          type: EDIT_COMPANY_FAILURE,
           error: error
         })
       })

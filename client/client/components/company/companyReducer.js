@@ -54,7 +54,7 @@ const companies = (state = DEFAULT_STATE, action) => {
     console.log(action.id)
       return {
         ...state,
-        companies: state.companies.filter(item => {return item._id !== action.id;}),
+        companies: state.companies.filter(item => {return item.iden !== action.id;}),
         loading: false
       }
     case 'DELETE_COMPANY_FAILURE':
@@ -76,6 +76,28 @@ const companies = (state = DEFAULT_STATE, action) => {
         loading: false
       }
     case 'GET_COMPANY_FAILURE':
+      return {
+        ...state,
+        loading: false,
+        company: {},
+        error: action.error
+      }
+
+  case 'EDIT_COMPANY_REQUEST':
+      return {
+        ...state,
+        loading: true      
+      }
+    case 'EDIT_COMPANY_SUCCESS':
+    var comps= state.companies.map((comp) => {
+      if(comp.iden === action.company.iden){return action.company}
+      else{return comp}})
+    return {
+        ...state,
+        companies: comps,
+        loading: false
+      }
+    case 'EDIT_COMPANY_FAILURE':
       return {
         ...state,
         loading: false,

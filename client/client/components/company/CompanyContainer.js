@@ -4,9 +4,6 @@ import CompanyTable from './CompanyTable';
 import { connect } from 'react-redux'
 import { addCompany, uploadCompanies, deleteCompany, editCompany, getCompany } from './actions'
 
-const uuidv1 = require('uuid/v1');
-// Contaner Component
-
 
 class CompanyContainer extends React.Component{
 
@@ -44,21 +41,25 @@ class CompanyContainer extends React.Component{
    }
   
   loadForm(event){
-    var id = event.target.parentNode.parentNode.getAttribute('id')
-    this.props.getCompany(id)
-    var company = this.props.company[0]
+    var parentNode = event.target.parentNode;
+    var id = parentNode.parentNode.getAttribute('id')
     document.getElementById("idField").value = id;
     document.getElementById("idField").readOnly = true;
-    document.getElementById("name").value = company.name
-    document.getElementById("address").value = company.address
-    document.getElementById("phone").value = company.phone
-    //cargar datos en form
+    document.getElementById("name").value = parentNode.previousElementSibling.previousElementSibling.previousElementSibling.innerText
+    document.getElementById("address").value = parentNode.previousElementSibling.previousElementSibling.innerText
+    document.getElementById("phone").value = parentNode.previousElementSibling.innerText
+
   }
+    //cargar datos en form
+  
 
   editCompany(event){
     //guardar datos
-    var id = event.target.parentNode.parentNode.getAttribute('id')
-    this.props.editCompany(id)
+    var id=document.getElementById("idField").value;
+    var n =document.getElementById("name").value;
+    var a=document.getElementById("address").value;
+    var p=document.getElementById("phone").value;
+    this.props.editCompany(id, n, a, p)
    }    
 
   render(){
@@ -72,6 +73,62 @@ class CompanyContainer extends React.Component{
 
 
     return (
+    <div>
+    <div className="modal fade" id="myModalNorm" tabIndex="-1" role="dialog" 
+       aria-labelledby="myModalLabel" aria-hidden="true">
+      <div className="modal-dialog">
+          <div className="modal-content">
+           
+              <div className="modal-header">
+                  <button type="button" className="close" 
+                     data-dismiss="modal">
+                         <span aria-hidden="true">&times;</span>
+                         <span className="sr-only">Close</span>
+                  </button>
+                  <h4 className="modal-title" id="myModalLabel">
+                      Edit Company
+                  </h4>
+              </div>
+              
+
+              <div className="modal-body">
+                  
+                  <form role="form" >
+                    <div className="form-group">
+                      <label htmlFor="exampleInputEmail1">Identifier</label>
+                        <input className="form-control"
+                        id="idField" name="id"/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputPassword1">Name</label>
+                        <input className="form-control" id="name" name="name"/>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="exampleInputPassword1">Address</label>
+                        <input className="form-control" id="address" name="address"/>
+                    </div>
+                     <div className="form-group">
+                      <label htmlFor="exampleInputPassword1">Phone</label>
+                        <input className="form-control" id="phone" name="phone"/>
+                    </div>
+                  </form>
+                  
+                  
+              </div>
+              
+              
+              <div className="modal-footer">
+                  <button type="button" className="btn btn-default"
+                          data-dismiss="modal">
+                              Close
+                  </button>
+                  <button type="button" data-dismiss="modal" onClick={this.editCompany} className="btn btn-primary">
+                      Save changes
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
      <div>
       COMPANIES
       <input
@@ -82,6 +139,7 @@ class CompanyContainer extends React.Component{
       <button id="addCompanyButt" onClick={this.handleSubmit}>Add</button>
       <CompanyTable companies={filteredElements} loadForm={this.loadForm} deleteCompany={this.deleteCompany} editCompany={this.editCompany}/>           
     </div> 
+    </div>
     );
   }
 
@@ -103,8 +161,8 @@ function mapDispatchToProps(dispatch) {
     addCompany: value => dispatch(addCompany(value)),
     uploadCompanies: value => dispatch(uploadCompanies(value)),
     deleteCompany: value => dispatch(deleteCompany(value)),
-    editCompany: value => dispatch(editCompany(value)),
-    getCompany: value => dispatch(getCompany(value))
+    editCompany(id, name, address, phone){dispatch(editCompany(id, name, address, phone))},
+    getCompany(value){dispatch(getCompany(value))}
   }
 }
 

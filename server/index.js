@@ -8,6 +8,7 @@ const DB_QUERY_STRING = process.env.DB
   || 'mongodb://localhost:27017/CRM'
 
 const companyRoutes = require('./routes/companies')
+const contactRoutes = require('./routes/contacts')
 const app = express()
 // create application/json parser
 
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/companies', companyRoutes)
-
+app.use('/contacts', contactRoutes)
 // app.get('/about', (req, res) => {
 //   res.send('ABOUT 💩')
 // })

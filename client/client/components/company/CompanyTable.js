@@ -6,9 +6,7 @@ import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
 
 const CompanyTable = (props) => {
   // Map through the companies
-  const companyItems = props.companies.filter(function(el, i) {
-      return el.done !== true;
-      }).map((company) => {
+  const companyItems = props.companies.map((company) => {
     return (<CompanyItem company={company} key={company.iden}  loadForm={props.loadForm} deleteCompany={props.deleteCompany} editCompany={props.editCompany}/>)
   });
 

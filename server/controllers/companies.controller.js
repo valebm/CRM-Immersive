@@ -26,7 +26,6 @@ function getCompany(req, res) {
 }
 
 function deleteCompany(req, res) {
-  console.log(req.params.id)
   Company.deleteOne({iden: req.params.id})
     .exec((err, company) => {
       if (err) {
@@ -35,6 +34,22 @@ function deleteCompany(req, res) {
       }
       res.status(300)
       res.json(company)
+    })
+}
+
+function editCompany(req, res) {
+  console.log(req.body)
+  console.log(req.params)
+  Company.updateOne({iden: req.params.id}, {
+     $set: { name: req.body.name, address: req.body.address, phone: req.body.phone }
+   })
+    .exec((err, company) => {
+      if (err) {
+        res.status(500)
+        res.send(`Ocurrió un error 💩 ${err}`)
+      }
+      res.status(300)
+      res.json({ iden: req.params.id, name: req.body.name, address: req.body.address, phone: req.body.phone })
     })
 }
 
@@ -50,5 +65,5 @@ function add(req, res) {
 }
 
 module.exports = {
-  getAll, add, getCompany, deleteCompany
+  getAll, add, getCompany, deleteCompany, editCompany
 }
