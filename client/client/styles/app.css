@@ -40,6 +40,15 @@
   position: relative;
 }
 
+.under{
+    position: absolute;
+    margin: auto;
+    top: 60vh;
+    left: 4vw;
+    right: 13vw;
+    bottom: 0; 
+}
+
 .crm{
     position: absolute;
     margin: auto;
@@ -95,7 +104,7 @@ li{
   height:100%;
   left:-140px;
   transition:all 500ms linear;
-  background-color: #d95f48;
+  background-color: #4d4d4d;
 }
 #sidebar.active{
   left:0px;

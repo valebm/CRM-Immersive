@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import '../../styles/app.css';
 
-class HomeContainer extends React.Component{
+class HelpContainer extends React.Component{
 
   constructor(props){
  
@@ -17,9 +17,9 @@ class HomeContainer extends React.Component{
     if (document.getElementById('contain') !== null){document.getElementById('contain').className="container-fluid container-pattern"}; 
     return (
     <div className="crmCont">
-    <img className="crm" src={require('../../images/teamwork.png')}></img>
-    <h1 className="crmText"><strong>CRM</strong></h1>
-    <h6 className="crmText2">Customer Relationship Management</h6>
+    <img className="under" src={require('../../images/under.png')}></img>
+    <h1 className="crmText"><strong>Under Construction</strong></h1>
+    <h6 className="crmText2">Check back soon!</h6>
     </div>
     );
   }
@@ -27,4 +27,4 @@ class HomeContainer extends React.Component{
 }
 
 
-export default HomeContainer;
+export default HelpContainer;
