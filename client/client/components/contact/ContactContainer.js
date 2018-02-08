@@ -86,17 +86,20 @@ class ContactContainer extends React.Component{
    }    
 
   render(){
-    document.getElementById('contain').className="container-fluid"; 
+    document.getElementById('contain').className="container-fluid banner"; 
     // Render JSX
     const elements  = this.props.contacts;
     const filterStr  = this.state.filt;
     var filteredElements = elements
-      .filter(e => (e.name.includes(filterStr) || e.email.includes(filterStr) || e._id.includes(filterStr) || e.phone.toString().includes(filterStr) || e.iden.includes(filterStr) || e.position.includes(filterStr) || e.company.includes(filterStr)))
+      .filter(e => (e.name.toLowerCase().includes(filterStr.toLowerCase()) || e.email.toLowerCase().includes(filterStr.toLowerCase()) || e._id.toLowerCase().includes(filterStr.toLowerCase()) || e.phone.toString().includes(filterStr) || e.iden.includes(filterStr) || e.position.toLowerCase().includes(filterStr.toLowerCase()) || e.company.toLowerCase().includes(filterStr.toLowerCase())))
 
     if (this.props.location.search !== ""){
       this.state.company = this.props.location.search.slice(1)
-      filteredElements = filteredElements.filter(e => (e.company === this.props.location.search.slice(1)))
-    } 
+      filteredElements = filteredElements.filter(e => (e.company.toLowerCase() === this.props.location.search.slice(1).toLowerCase()))
+    }
+    else{
+      this.state.company = ""
+    }
 
     return (
     <div>
@@ -111,7 +114,7 @@ class ContactContainer extends React.Component{
                          <span aria-hidden="true">&times;</span>
                          <span className="sr-only">Close</span>
                   </button>
-                  <h4 className="modal-title" id="myModalLabel">
+                  <h4 className="modal-title font-title" id="myModalLabel">
                       Contact Form
                   </h4>
               </div>
@@ -121,28 +124,28 @@ class ContactContainer extends React.Component{
                   
                   <form role="form" >
                     <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Identifier</label>
+                      <label htmlFor="exampleInputEmail1" className="font-title">Identifier</label>
                         <input className="form-control"
                         id="idField" name="id"/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Name</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Name</label>
                         <input className="form-control" id="name" name="name"/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Email</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Email</label>
                         <input className="form-control" id="email" name="email"/>
                     </div>
                      <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Phone</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Phone</label>
                         <input className="form-control" id="phone" name="phone"/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Position</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Position</label>
                         <input className="form-control" id="position" name="position"/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Company</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Company</label>
                         <input className="form-control" id="company" name="company"/>
                     </div>
                   </form>
@@ -152,11 +155,11 @@ class ContactContainer extends React.Component{
               
               
               <div className="modal-footer">
-                  <button type="button" className="btn btn-default"
+                  <button type="button" className="btn btn-default font-title"
                           data-dismiss="modal">
                               Close
                   </button>
-                  <button type="button" data-dismiss="modal" onClick={this.editContact} className="btn btn-primary">
+                  <button type="button" data-dismiss="modal" onClick={this.editContact} className="btn btn-info font-title">
                       Save
                   </button>
               </div>
@@ -165,15 +168,13 @@ class ContactContainer extends React.Component{
   </div>
      <div className="title">
       <h1 className="seccion">CONTACTS {this.state.company}</h1>
-      <input
-          type="text"
-          value={ this.state.filt }
-          onChange={ e => this.setState({ filt: e.target.value }) } />
-      <button id="addContactButt" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm">Add</button>
+      <div className="tableContain">
+      <input type="text" value={ this.state.filt } onChange={ e => this.setState({ filt: e.target.value }) } placeholder="Find contact"/>
+      <img src={require('../../images/magnifier.png')}></img>
+      <button id="addCompanyButt" className="btn btn-lg btn-secondary" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm"><strong>+</strong> Add New</button>
       <ContactTable contacts={filteredElements} loadForm={this.loadForm} deleteContact={this.deleteContact} editContact={this.editContact}/>           
+      </div>
     </div> 
-    <div className="banner container-pattern container-fluid">
-     </div>
     </div>
     );
   }

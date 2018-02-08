@@ -22,7 +22,7 @@ const EDIT_CONTACT_FAILURE = 'EDIT_CONTACT_FAILURE'
 // API URL Constant
 const API_URL = 'http://localhost:8081/contacts'
 
-export function addContact(id, n, a, p, po, c) {
+export function addContact(id, n, e, p, po, c) {
     return function (dispatch) {
     dispatch({
       type: ADD_CONTACT_REQUEST
@@ -33,7 +33,7 @@ export function addContact(id, n, a, p, po, c) {
       body: JSON.stringify({
         iden: id,
         name: n,
-        address: a,
+        email: e,
         phone: p,
         position: po,
         company: c

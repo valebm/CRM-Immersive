@@ -8,11 +8,12 @@
 }
 
 .container-pattern{
-  background-image: url('./../images/pattern.png');
+  background-image: url('./../images/bg.png');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; 
 }
+
 
 .btn{
   margin-left: 2vw;
@@ -23,11 +24,16 @@
   font-family: 'Barlow Condensed', sans-serif; 
 }
 
+.font-title{
+  font-family: 'Barlow Condensed', sans-serif; 
+}
+
 .banner{
-  height: 100vh;
-  width: 100vw;
-  z-index: 900;
-  float:bottom;
+  background-image: url('./../images/bg2.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+  margin-left: 0;
 }
 
 .crmCont{
@@ -53,6 +59,7 @@
     font-size: 600%;
     text-align:center;
     font-family: 'Barlow Condensed', sans-serif; 
+    color: #484b48;
   }
 
 .crmText2{
@@ -64,7 +71,8 @@
     bottom: 0;
     font-size: 300%;
     text-align:center;
-    font-family: 'Barlow Condensed', sans-serif;     
+    font-family: 'Barlow Condensed', sans-serif;    
+    color: #2a8bff;
   }
 
 
@@ -102,7 +110,7 @@ li{
   display:block;
   width:30px;
   height:5px;
-  background: black;
+  background: #002654;
   margin:5px 0px;
 }
 
@@ -111,10 +119,15 @@ li{
 }
 
 .table{
-  color: #747674;
+  color: #484b48;
   margin-top: 1vh;
   margin-right: 20vw;
   font-size: 120%;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgba(0, 38, 84, 0.4);
 }
 
 .seccion{
@@ -163,3 +176,4 @@ li{
 .zoomIn { 
     animation-name: zoomIn; 
 }
+

@@ -42,6 +42,7 @@ function editContact(req, res) {
 
 function add(req, res) {
   var cont = new Contact(req.body);
+  console.log("contacto ",cont)
   cont.save(function (err) {
     if (err) {
       res.status(500)

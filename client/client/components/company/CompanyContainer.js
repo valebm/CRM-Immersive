@@ -77,17 +77,15 @@ class CompanyContainer extends React.Component{
 
   render(){
     // Render JSX
-    document.getElementById('contain').className="container-fluid"; 
+    document.getElementById('contain').className="container-fluid banner"; 
     const elements  = this.props.companies;
     const filterStr  = this.state.filt;
     const filteredElements = elements
-      .filter(e => (e.name.includes(filterStr) || e.address.includes(filterStr) || e._id.includes(filterStr) || e.phone.toString().includes(filterStr)))
+      .filter(e => (e.name.toLowerCase().includes(filterStr.toLowerCase()) || e.address.toLowerCase().includes(filterStr.toLowerCase()) || e._id.includes(filterStr) || e.phone.toString().includes(filterStr)))
 
 
     return (
     <div>
-    <div className="contacts-container">
-    </div>
     <div className="modal fade" id="myModalNorm" tabIndex="-1" role="dialog" 
        aria-labelledby="myModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -99,7 +97,7 @@ class CompanyContainer extends React.Component{
                          <span aria-hidden="true">&times;</span>
                          <span className="sr-only">Close</span>
                   </button>
-                  <h4 className="modal-title" id="myModalLabel">
+                  <h4 className="modal-title font-title" id="myModalLabel">
                      Company Form
                   </h4>
               </div>
@@ -109,20 +107,20 @@ class CompanyContainer extends React.Component{
                   
                   <form role="form" >
                     <div className="form-group">
-                      <label htmlFor="exampleInputEmail1">Identifier</label>
+                      <label htmlFor="exampleInputEmail1" className="font-title">Identifier</label>
                         <input className="form-control"
                         id="idField" name="id"/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Name</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Name</label>
                         <input className="form-control" id="name" name="name"/>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Address</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Address</label>
                         <input className="form-control" id="address" name="address"/>
                     </div>
                      <div className="form-group">
-                      <label htmlFor="exampleInputPassword1">Phone</label>
+                      <label htmlFor="exampleInputPassword1" className="font-title">Phone</label>
                         <input className="form-control" id="phone" name="phone"/>
                     </div>
                   </form>
@@ -132,11 +130,11 @@ class CompanyContainer extends React.Component{
               
               
               <div className="modal-footer">
-                  <button type="button" className="btn btn-default"
+                  <button type="button" className="btn btn-default font-title"
                           data-dismiss="modal">
                               Close
                   </button>
-                  <button type="button" data-dismiss="modal" onClick={this.editCompany} className="btn btn-primary">
+                  <button type="button" data-dismiss="modal" onClick={this.editCompany} className="btn btn-info font-title">
                       Save
                   </button>
               </div>
@@ -146,15 +144,13 @@ class CompanyContainer extends React.Component{
 
      <div className="title">
       <h1 className="seccion">COMPANIES</h1>
+      <div className="tableContain">
       <input type="text" value={ this.state.filt } onChange={ e => this.setState({ filt: e.target.value }) } placeholder="Find company"/>
       <img src={require('../../images/magnifier.png')}></img>
-      <div className="tableContain">
-      <button id="addCompanyButt" className="btn btn-lg btn-outline-warning" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm">Add New</button>
+      <button id="addCompanyButt" className="btn btn-lg btn-secondary" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm"><strong>+</strong> Add New</button>
       <CompanyTable companies={filteredElements} loadForm={this.loadForm} deleteCompany={this.deleteCompany} editCompany={this.editCompany}/>           
       </div>
-      </div> 
-     <div className="banner container-pattern container-fluid">
-     </div>
+      </div>
     </div>
     );
   }
