@@ -171,7 +171,7 @@ class ContactContainer extends React.Component{
       <div className="tableContain">
       <input type="text" value={ this.state.filt } onChange={ e => this.setState({ filt: e.target.value }) } placeholder="Find contact"/>
       <img src={require('../../images/magnifier.png')}></img>
-      <button id="addCompanyButt" className="btn btn-lg btn-secondary" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm"><strong>+</strong> Add New</button>
+      <button id="addCompanyButt" className="btn btn-lg btn-success" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm"><strong>+</strong> Add New</button>
       <ContactTable contacts={filteredElements} loadForm={this.loadForm} deleteContact={this.deleteContact} editContact={this.editContact}/>           
       </div>
     </div> 

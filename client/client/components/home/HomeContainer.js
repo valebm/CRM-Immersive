@@ -17,8 +17,8 @@ class HomeContainer extends React.Component{
     if (document.getElementById('contain') !== null){document.getElementById('contain').className="container-fluid container-pattern"}; 
     return (
     <div className="crmCont">
-    <img className="crm animated zoomIn" src={require('../../images/crm4.png')}></img>
-    <h1 className="crmText">CRM</h1>
+    <img className="crm" src={require('../../images/teamwork.png')}></img>
+    <h1 className="crmText"><strong>CRM</strong></h1>
     <h6 className="crmText2">Contact Relationship Management</h6>
     </div>
     );

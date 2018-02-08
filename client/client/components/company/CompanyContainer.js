@@ -147,7 +147,7 @@ class CompanyContainer extends React.Component{
       <div className="tableContain">
       <input type="text" value={ this.state.filt } onChange={ e => this.setState({ filt: e.target.value }) } placeholder="Find company"/>
       <img src={require('../../images/magnifier.png')}></img>
-      <button id="addCompanyButt" className="btn btn-lg btn-secondary" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm"><strong>+</strong> Add New</button>
+      <button id="addCompanyButt" className="btn btn-lg btn-success" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm"><strong>+</strong> Add New</button>
       <CompanyTable companies={filteredElements} loadForm={this.loadForm} deleteCompany={this.deleteCompany} editCompany={this.editCompany}/>           
       </div>
       </div>
