@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import CompanyTable from './CompanyTable';
 import { connect } from 'react-redux'
 import { addCompany, uploadCompanies, deleteCompany, editCompany, getCompany } from './actions'
-
+import { Route, Switch } from 'react-router-dom'
+import ContactContainer from '../contact/ContactContainer';
+import uuid from 'uuid/v1'
+// Contaner Component
 
 class CompanyContainer extends React.Component{
 
@@ -14,25 +17,21 @@ class CompanyContainer extends React.Component{
     // Set initial state
     this.state = {
       value: '',
-      filt: ''
+      filt: '',
+      new: false
     }
 
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.deleteCompany = this.deleteCompany.bind(this);
     this.editCompany = this.editCompany.bind(this);
     this.loadForm = this.loadForm.bind(this);
+    this.addForm = this.addForm.bind(this);
     }
 
   handleChange(event){
     this.setState({value: event.target.value});
 
-   }
-
-   handleSubmit(event){
-   	this.props.addCompany(this.state.value)
-    this.setState({ value: '' })
    }
 
    deleteCompany(event){
@@ -41,6 +40,7 @@ class CompanyContainer extends React.Component{
    }
   
   loadForm(event){
+    this.state.new = false;
     var parentNode = event.target.parentNode;
     var id = parentNode.parentNode.getAttribute('id')
     document.getElementById("idField").value = id;
@@ -50,7 +50,15 @@ class CompanyContainer extends React.Component{
     document.getElementById("phone").value = parentNode.previousElementSibling.innerText
 
   }
-    //cargar datos en form
+
+  addForm(event){
+    this.state.new = true;
+    document.getElementById("idField").value = uuid();
+    document.getElementById("idField").readOnly = true;
+    document.getElementById("name").value = ""
+    document.getElementById("address").value = ""
+    document.getElementById("phone").value = ""
+  }
   
 
   editCompany(event){
@@ -59,7 +67,12 @@ class CompanyContainer extends React.Component{
     var n =document.getElementById("name").value;
     var a=document.getElementById("address").value;
     var p=document.getElementById("phone").value;
-    this.props.editCompany(id, n, a, p)
+    if (this.state.new){
+      this.props.addCompany(id, n, a, p)
+    }
+    else{
+      this.props.editCompany(id, n, a, p)
+    }
    }    
 
   render(){
@@ -74,6 +87,10 @@ class CompanyContainer extends React.Component{
 
     return (
     <div>
+    <div className="contacts-container">
+
+
+    </div>
     <div className="modal fade" id="myModalNorm" tabIndex="-1" role="dialog" 
        aria-labelledby="myModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -123,7 +140,7 @@ class CompanyContainer extends React.Component{
                               Close
                   </button>
                   <button type="button" data-dismiss="modal" onClick={this.editCompany} className="btn btn-primary">
-                      Save changes
+                      Save
                   </button>
               </div>
           </div>
@@ -135,8 +152,7 @@ class CompanyContainer extends React.Component{
           type="text"
           value={ this.state.filt }
           onChange={ e => this.setState({ filt: e.target.value }) } />
-      <input type="text" id="companyVal" value={this.state.value} onChange={this.handleChange}></input>
-      <button id="addCompanyButt" onClick={this.handleSubmit}>Add</button>
+      <button id="addCompanyButt" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm">Add</button>
       <CompanyTable companies={filteredElements} loadForm={this.loadForm} deleteCompany={this.deleteCompany} editCompany={this.editCompany}/>           
     </div> 
     </div>
@@ -158,7 +174,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addCompany: value => dispatch(addCompany(value)),
+    addCompany(id, name, address, phone){dispatch(addCompany(id, name, address, phone))},
     uploadCompanies: value => dispatch(uploadCompanies(value)),
     deleteCompany: value => dispatch(deleteCompany(value)),
     editCompany(id, name, address, phone){dispatch(editCompany(id, name, address, phone))},

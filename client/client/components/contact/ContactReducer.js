@@ -93,7 +93,6 @@ const contacts = (state = DEFAULT_STATE, action) => {
     var conts= state.contacts.map((cont) => {
       if(cont.iden === action.contact.iden){return action.contact}
       else{return cont}})
-    console.log(conts)
     return {
         ...state,
         contacts: conts,

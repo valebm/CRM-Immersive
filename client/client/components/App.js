@@ -40,7 +40,7 @@ const App = ({props}) =>{
     <Switch>
       <Route path='/companies' component={CompanyContainer}/>
       <Route path='/contacts' component={ContactContainer}/>
-	</Switch>
+	  </Switch>
 	</main>
 
 

@@ -21,7 +21,7 @@ const EDIT_COMPANY_FAILURE = 'EDIT_COMPANY_FAILURE'
 // API URL Constant
 const API_URL = 'http://localhost:8081/companies'
 
-export function addCompany(value) {
+export function addCompany(id, name, address, phone) {
     return function (dispatch) {
     dispatch({
       type: ADD_COMPANY_REQUEST
@@ -30,10 +30,10 @@ export function addCompany(value) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({
-        iden: uuid(),
-        name: value,
-        address: '',
-        phone: 0
+        iden: id,
+        name: name,
+        address: address,
+        phone: phone
       }),
     })
       .then(response => response.json())

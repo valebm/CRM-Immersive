@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import ContactTable from './ContactTable';
 import { connect } from 'react-redux'
 import { addContact, uploadContacts, deleteContact, editContact } from './actions'
+// crea ids
+import uuid from 'uuid/v1'
 // Contaner Component
 
 
@@ -14,17 +16,18 @@ class ContactContainer extends React.Component{
     super(props);
     // Set initial state
     this.state = {
-      contacts: [],
-      value: ''
+      filt: '',
+      value: '',
+      new: false, 
+      company: ""
     }
 
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.deleteContact = this.deleteContact.bind(this);
     this.editContact = this.editContact.bind(this);
     this.loadForm = this.loadForm.bind(this);
-
+    this.addForm = this.addForm.bind(this);
     }
 
   handleChange(event){
@@ -32,10 +35,6 @@ class ContactContainer extends React.Component{
     console.log(this.state.value)
    }
 
-  handleSubmit(event){
-   	this.props.addContact(this.state.value)
-    this.setState({ value: '' })
-   }
 
   deleteContact(event){
     var id = event.target.parentNode.parentNode.getAttribute('id')
@@ -43,6 +42,7 @@ class ContactContainer extends React.Component{
    }
   
   loadForm(event){
+    this.state.new = false;
     var parentNode = event.target.parentNode;
     var id = parentNode.parentNode.getAttribute('id')
     document.getElementById("idField").value = id;
@@ -54,23 +54,50 @@ class ContactContainer extends React.Component{
     document.getElementById("company").value = parentNode.previousElementSibling.innerText
 
   }
+
+  addForm(event){
+    this.state.new = true;
+    document.getElementById("idField").value = uuid();
+    document.getElementById("idField").readOnly = true;
+    document.getElementById("name").value = ""
+    document.getElementById("email").value = ""
+    document.getElementById("phone").value = ""
+    document.getElementById("position").value = ""
+    document.getElementById("company").value = ""
+  }
     //cargar datos en form
   
 
   editContact(event){
     //guardar datos
+
     var id=document.getElementById("idField").value;
     var n =document.getElementById("name").value;
     var a=document.getElementById("email").value;
     var p=document.getElementById("phone").value;
     var po=document.getElementById("position").value;
     var c=document.getElementById("company").value;
-    this.props.editContact(id, n, a, p, po, c)
+    if (this.state.new){
+      this.props.addContact(id, n, a, p, po, c)
+    }
+    else{
+      this.props.editContact(id, n, a, p, po, c)
+    }
    }    
 
   render(){
     // Render JSX
-    console.log(this.state)
+    const elements  = this.props.contacts;
+    const filterStr  = this.state.filt;
+
+    var filteredElements = elements
+      .filter(e => (e.name.includes(filterStr) || e.email.includes(filterStr) || e._id.includes(filterStr) || e.phone.toString().includes(filterStr) || e.iden.includes(filterStr) || e.position.includes(filterStr) || e.company.includes(filterStr)))
+
+    if (this.props.location.search !== ""){
+      this.state.company = this.props.location.search.slice(1)
+      filteredElements = filteredElements.filter(e => (e.company === this.props.location.search.slice(1)))
+    } 
+
     return (
     <div>
         <div className="modal fade" id="myModalNorm" tabIndex="-1" role="dialog" 
@@ -130,17 +157,20 @@ class ContactContainer extends React.Component{
                               Close
                   </button>
                   <button type="button" data-dismiss="modal" onClick={this.editContact} className="btn btn-primary">
-                      Save changes
+                      Save
                   </button>
               </div>
           </div>
       </div>
   </div>
      <div>
-      CONTACTS
-      <input type="text" id="contactVal" value={this.state.value} onChange={this.handleChange}></input>
-      <button id="addContactButt" onClick={this.handleSubmit}>Add</button>
-      <ContactTable contacts={this.props.contacts} loadForm={this.loadForm} deleteContact={this.deleteContact} editContact={this.editContact}/>           
+      CONTACTS {this.state.company}
+      <input
+          type="text"
+          value={ this.state.filt }
+          onChange={ e => this.setState({ filt: e.target.value }) } />
+      <button id="addContactButt" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm">Add</button>
+      <ContactTable contacts={filteredElements} loadForm={this.loadForm} deleteContact={this.deleteContact} editContact={this.editContact}/>           
     </div> 
     </div>
     );
@@ -162,7 +192,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addContact: value => dispatch(addContact(value)),
+    addContact(id, name, email, phone, position, company){dispatch(addContact(id, name, email, phone, position, company))},
     uploadContacts: value => dispatch(uploadContacts(value)),
     deleteContact: value => dispatch(deleteContact(value)),
     editContact(id, name, email, phone, position, company){dispatch(editContact(id, name, email, phone, position, company))},
