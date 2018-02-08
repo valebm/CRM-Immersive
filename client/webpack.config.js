@@ -22,7 +22,8 @@ module.exports = {
       { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ , query: {presets: ['es2015', 'react']}},
       { test: /\.css$/, loader: 'style-loader'},
-      { test: /\.css$/, loader: 'css-loader'}
+      { test: /\.css$/, loader: 'css-loader'},
+      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' }
     ]
   },
 

@@ -86,10 +86,10 @@ class ContactContainer extends React.Component{
    }    
 
   render(){
+    document.getElementById('contain').className="container-fluid"; 
     // Render JSX
     const elements  = this.props.contacts;
     const filterStr  = this.state.filt;
-
     var filteredElements = elements
       .filter(e => (e.name.includes(filterStr) || e.email.includes(filterStr) || e._id.includes(filterStr) || e.phone.toString().includes(filterStr) || e.iden.includes(filterStr) || e.position.includes(filterStr) || e.company.includes(filterStr)))
 
@@ -112,7 +112,7 @@ class ContactContainer extends React.Component{
                          <span className="sr-only">Close</span>
                   </button>
                   <h4 className="modal-title" id="myModalLabel">
-                      Edit Company
+                      Contact Form
                   </h4>
               </div>
               
@@ -163,8 +163,8 @@ class ContactContainer extends React.Component{
           </div>
       </div>
   </div>
-     <div>
-      CONTACTS {this.state.company}
+     <div className="title">
+      <h1 className="seccion">CONTACTS {this.state.company}</h1>
       <input
           type="text"
           value={ this.state.filt }
@@ -172,6 +172,8 @@ class ContactContainer extends React.Component{
       <button id="addContactButt" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm">Add</button>
       <ContactTable contacts={filteredElements} loadForm={this.loadForm} deleteContact={this.deleteContact} editContact={this.editContact}/>           
     </div> 
+    <div className="banner container-pattern container-fluid">
+     </div>
     </div>
     );
   }

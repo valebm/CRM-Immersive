@@ -10,7 +10,7 @@ const ContactTable = (props) => {
     return (<ContactItem contact={contact} key={contact.iden} loadForm={props.loadForm} deleteContact={props.deleteContact} editContact={props.editContact}/>)
   });
 
-  return (<div><table className="table table-striped table-hover"><caption>List of contacts</caption><thead className="thead-dark"><tr><th scope="col">ID</th><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Phone</th><th scope="col">Position</th><th scope="col">Company</th><th></th></tr></thead>{contactItems}</table></div>);
+  return (<div><table className="table table-striped table-hover"><caption>List of contacts</caption><thead className="thead-dark"><tr><th scope="col">Name</th><th scope="col">Email</th><th scope="col">Phone</th><th scope="col">Position</th><th scope="col">Company</th><th>Actions</th></tr></thead>{contactItems}</table></div>);
 }
 
 

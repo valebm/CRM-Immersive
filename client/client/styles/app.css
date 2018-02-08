@@ -1,37 +1,138 @@
 
 
-.container-fluid { position:relative; padding:0 0 0 55px; }
+.container-fluid { 
+  position:relative; 
+  padding:0 0 0 55px;
+  width: 100%;
+  height: 100vh;
+}
+
+.container-pattern{
+  background-image: url('./../images/pattern.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+}
+
+.btn{
+  margin-left: 2vw;
+}
+
+.title{
+  padding-top: 10vh;
+  font-family: 'Barlow Condensed', sans-serif; 
+}
+
+.banner{
+  height: 100vh;
+  width: 100vw;
+  z-index: 900;
+  float:bottom;
+}
+
+.crmCont{
+  position: relative;
+}
+
+.crm{
+    position: absolute;
+    margin: auto;
+    top: 60vh;
+    left: 4vw;
+    right: 13vw;
+    bottom: 0;
+  }
+
+.crmText{
+    position: absolute;
+    margin: auto;
+    top: 60vh;
+    left: 4vw;
+    right: 13vw;
+    bottom: 0;
+    font-size: 600%;
+    text-align:center;
+    font-family: 'Barlow Condensed', sans-serif; 
+  }
+
+.crmText2{
+    position: absolute;
+    margin: auto;
+    top: 80vh;
+    left: 4vw;
+    right: 13vw;
+    bottom: 0;
+    font-size: 300%;
+    text-align:center;
+    font-family: 'Barlow Condensed', sans-serif;     
+  }
+
+
+li{
+  width: 100px;
+  height: 100px;
+}
+
 
 #sidebar{
+  z-index: 950;
   position:fixed;
-  width:200px;
+  width:140px;
   height:100%;
-  background-color:#151719;
-  left:-200px;
+  left:-140px;
   transition:all 500ms linear;
+  background-color: #002047;
 }
 #sidebar.active{
   left:0px;
 }
+
 #sidebar ul li{
   color:rgba(230,230,230,0.9);
   list-style:none;
   padding:15px 10px;
-  border-bottom:1px solid rgba(100,100,100,0.3);
+  border-bottom:1px solid;
 }
 #sidebar .toggle-btn{
   position:absolute;
-  left:230px;
+  left:180px;
   top:20px;
 }
 #sidebar .toggle-btn span{
   display:block;
   width:30px;
   height:5px;
-  background: #151719;
+  background: black;
   margin:5px 0px;
 }
 
+.tableContain{
+  margin-right: 4vw;
+}
+
+.table{
+  color: #747674;
+  margin-top: 1vh;
+  margin-right: 20vw;
+  font-size: 120%;
+}
+
+.seccion{
+  color:#d65a40;
+}
+
+.link{
+  color:black;
+}
+
+#addCompanyButt{
+  float:right;
+}
+
+
+.table-responsive{
+  text-align: center;
+}
 
 .modal-body .form-horizontal .col-sm-2,
 .modal-body .form-horizontal .col-sm-10 {
@@ -43,4 +144,22 @@
 }
 .modal-body .form-horizontal .col-sm-offset-2 {
     margin-left: 15px;
+}
+
+.animated { 
+    animation-duration: 1s; 
+    animation-fill-mode: both; 
+} 
+
+@keyframes zoomIn { 
+    0% { 
+        opacity: 0; 
+        transform: scale3d(.3, .3, .3); 
+    } 
+    50% { 
+        opacity: 1; 
+    } 
+} 
+.zoomIn { 
+    animation-name: zoomIn; 
 }

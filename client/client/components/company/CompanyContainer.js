@@ -77,10 +77,9 @@ class CompanyContainer extends React.Component{
 
   render(){
     // Render JSX
-    console.log(this.props)
+    document.getElementById('contain').className="container-fluid"; 
     const elements  = this.props.companies;
     const filterStr  = this.state.filt;
-
     const filteredElements = elements
       .filter(e => (e.name.includes(filterStr) || e.address.includes(filterStr) || e._id.includes(filterStr) || e.phone.toString().includes(filterStr)))
 
@@ -88,8 +87,6 @@ class CompanyContainer extends React.Component{
     return (
     <div>
     <div className="contacts-container">
-
-
     </div>
     <div className="modal fade" id="myModalNorm" tabIndex="-1" role="dialog" 
        aria-labelledby="myModalLabel" aria-hidden="true">
@@ -103,7 +100,7 @@ class CompanyContainer extends React.Component{
                          <span className="sr-only">Close</span>
                   </button>
                   <h4 className="modal-title" id="myModalLabel">
-                      Edit Company
+                     Company Form
                   </h4>
               </div>
               
@@ -145,16 +142,19 @@ class CompanyContainer extends React.Component{
               </div>
           </div>
       </div>
-  </div>
-     <div>
-      COMPANIES
-      <input
-          type="text"
-          value={ this.state.filt }
-          onChange={ e => this.setState({ filt: e.target.value }) } />
-      <button id="addCompanyButt" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm">Add</button>
+    </div>
+
+     <div className="title">
+      <h1 className="seccion">COMPANIES</h1>
+      <input type="text" value={ this.state.filt } onChange={ e => this.setState({ filt: e.target.value }) } placeholder="Find company"/>
+      <img src={require('../../images/magnifier.png')}></img>
+      <div className="tableContain">
+      <button id="addCompanyButt" className="btn btn-lg btn-outline-warning" onClick={this.addForm} data-toggle="modal" data-target="#myModalNorm">Add New</button>
       <CompanyTable companies={filteredElements} loadForm={this.loadForm} deleteCompany={this.deleteCompany} editCompany={this.editCompany}/>           
-    </div> 
+      </div>
+      </div> 
+     <div className="banner container-pattern container-fluid">
+     </div>
     </div>
     );
   }

@@ -2,9 +2,9 @@ const mongoose = require('mongoose')
 
 const companySchema = mongoose.Schema({
   iden: { type: String, required: true },
-  name: { type: String},
-  address: { type: String},
-  phone: { type: Number },
+  name: { type: String, required: true },
+  address: { type: String, required: true },
+  phone: { type: String, required: true },
 })
 
 const Company = mongoose.model("company", companySchema)
